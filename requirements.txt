@@ -1,0 +1,5 @@
+Scrapy==1.5.1
+scrapy-splash==0.7.2
+elasticsearch==6.3.1
+pyecharts
+pyecharts-snapshot==0.1.9

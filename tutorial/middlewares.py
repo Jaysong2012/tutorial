@@ -6,6 +6,12 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+import random
+from tutorial.settings import USER_AGENT_LIST
+from tutorial.settings import PROXIES
+from backend.libs.Util import Util
+from scrapy.http.headers import Headers
+from fake_useragent import UserAgent
 
 
 class TutorialSpiderMiddleware(object):
@@ -78,7 +84,11 @@ class TutorialDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        return None
+        request.headers = Headers(Util.get_header('2018.ip138.com'))
+
+        print(request.headers)
+
+        #request.meta['proxy'] = "http://%s" % random.choice(PROXIES)
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
@@ -101,3 +111,21 @@ class TutorialDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class RandomUserAgentMiddleware(object):
+
+    def __init__(self,crawler):
+        super(RandomUserAgentMiddleware, self).__init__()
+        self.ua = UserAgent()
+        self.ua_type = crawler.settings.get('RANDOM_UA_TYPE','random')
+
+    @classmethod
+    def from_crawler(cls,crawler):
+        return cls(crawler)
+
+    def process_request(self,request,spider):
+
+        def get_ua():
+            return getattr(self.ua,self.ua_type)
+        request.headers.setdefault('User-Agent',get_ua())

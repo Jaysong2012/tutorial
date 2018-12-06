@@ -84,11 +84,9 @@ class TutorialDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        request.headers = Headers(Util.get_header('2018.ip138.com'))
-
-        print(request.headers)
-
+        #request.headers = Headers(Util.get_header('2018.ip138.com'))
         #request.meta['proxy'] = "http://%s" % random.choice(PROXIES)
+        return None
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.

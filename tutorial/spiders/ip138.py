@@ -26,9 +26,9 @@ class Ip138Spider(scrapy.Spider):
     #     "Connection": "keep-alive"
     # }
     #
-    # def start_requests(self):
-    #     for url in self.start_urls:
-    #         yield scrapy.Request(url, headers=self.headers ,callback=self.parse)
+    def start_requests(self):
+        for url in self.start_urls:
+            yield scrapy.Request(url, meta={'proxy':'http://116.62.134.173:9999'} ,callback=self.parse)
 
     def parse(self, response):
         print("*" * 40)

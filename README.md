@@ -31,3 +31,4 @@ tutorial/
 
 ## 精彩时刻
 ### 爬取腾讯视频评论生成词云图效果图
+![效果图](https://github.com/Jaysong2012/tutorial/blob/master/backend/scripts/qq_video.png)

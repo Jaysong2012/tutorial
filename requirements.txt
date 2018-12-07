@@ -4,3 +4,4 @@ elasticsearch==6.3.1
 pyecharts
 pyecharts-snapshot==0.1.9
 fake-useragent==0.1.11
+selenium==3.141.0

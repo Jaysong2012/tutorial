@@ -113,7 +113,8 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    #'tutorial.pipelines.QQVideoCommentPipeline': 1,
-   'tutorial.pipelines.BaiDuSearchPipeline': 1,
+   #'tutorial.pipelines.BaiDuSearchPipeline': 1,
+   'tutorial.pipelines.ProxyPipeline': 1,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -139,3 +140,6 @@ ITEM_PIPELINES = {
 
 # 使用Splash的Http缓存
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
+#允许出现的错误码
+HTTPERROR_ALLOWED_CODES = [521]

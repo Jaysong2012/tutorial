@@ -6,6 +6,7 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import json
 import elasticsearch
+from backend.libs.Util import Util
 
 def get_es():
     return elasticsearch.Elasticsearch(['192.168.199.133:9200'])
@@ -27,4 +28,10 @@ class QQVideoCommentPipeline(object):
         get_es().index(index=__class__.index,doc_type=__class__.index,body=item['comment'])
         __class__.count += 1
         print(__class__.count)
+        return item
+
+class ProxyPipeline(object):
+    def process_item(self, item, spider):
+        if item['type'].find('高匿') > -1:
+            Util.record_proxy(item['ip']+':'+item['port']+'\n')
         return item

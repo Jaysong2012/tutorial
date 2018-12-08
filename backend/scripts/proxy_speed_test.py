@@ -19,32 +19,24 @@ def speed_test(line):
         print(e)
         return False
 
-r = redis.Redis(host='127.0.0.1', port=6379)
-
-def save_redis_set(line=None):
-    line = '383 36.110.234.244:80'
-    today = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    key = 'proxypool'+'_'+today+'_'+'key'
-    print(key)
-    r.sadd(key,line)
-    r.expire(key, 2)
-    print(r.smembers(key))
-
-    time.sleep(3)
-    print(r.smembers(key))
-
 
 
 if __name__ == '__main__':
+    r = redis.Redis(host='127.0.0.1', port=6379)
+    key = 'proxypool' + '_' + time.strftime("%Y-%m-%d", time.localtime(time.time())) + '_' + 'key'
 
-    # can_user_num = 0
-    # with open('../../proxy_pool.txt','r') as f:
-    #     lines = f.readlines()
-    #
-    # for i,line in enumerate(lines):
-    #     print(i,line)
-    #     if speed_test(line):
-    #         can_user_num +=1
-    # print('total :',len(lines),' can_user_num :',can_user_num)
-    save_redis_set()
+    can_user_num = 0
+    with open('../../proxy_pool.txt','r') as f:
+        lines = f.readlines()
+
+    for i,line in enumerate(lines):
+        print(i,line)
+        if speed_test(line):
+            can_user_num +=1
+            r.sadd(key, line)
+            
+    print('total :',len(lines),' can_user_num :',can_user_num)
+
+    r.expire(key, 7*24*60*60)
+    print(r.smembers(key))
 

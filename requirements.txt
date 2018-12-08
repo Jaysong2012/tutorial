@@ -5,7 +5,7 @@ pyecharts
 pyecharts-snapshot==0.1.9
 fake-useragent==0.1.11
 selenium==3.141.0
-request==2.20.1
+requests
 PyExecJS==1.5.1
 copyheaders==0.0.1
-redis==.0.1
+redis

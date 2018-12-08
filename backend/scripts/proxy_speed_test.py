@@ -33,8 +33,8 @@ if __name__ == '__main__':
         print(i,line)
         if speed_test(line):
             can_user_num +=1
-            r.sadd(key, line)
-            
+            r.sadd(key, line.replace('\n',''))
+
     print('total :',len(lines),' can_user_num :',can_user_num)
 
     r.expire(key, 7*24*60*60)

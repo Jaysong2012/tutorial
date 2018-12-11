@@ -19,9 +19,7 @@ def speed_test(line):
         print(e)
         return False
 
-
-
-if __name__ == '__main__':
+def redis_save():
     r = redis.Redis(host='127.0.0.1', port=6379)
     key = 'proxypool' + '_' + time.strftime("%Y-%m-%d", time.localtime(time.time())) + '_' + 'key'
 
@@ -39,4 +37,26 @@ if __name__ == '__main__':
 
     r.expire(key, 7*24*60*60)
     print(r.smembers(key))
+
+def print_useful():
+    can_use_proxies = []
+    can_user_num = 0
+    with open('../../proxy_pool.txt', 'r') as f:
+        lines = f.readlines()
+
+    for i, line in enumerate(lines):
+        line = line.replace('\n','')
+        print(i, line)
+        if speed_test(line):
+            can_user_num += 1
+            if line not in can_use_proxies:
+                can_use_proxies.append(line)
+
+    print(can_use_proxies)
+
+    print('total :',len(lines),' can_user_num :',can_user_num)
+
+
+if __name__ == '__main__':
+    print_useful()
 

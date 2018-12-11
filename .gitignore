@@ -4,3 +4,6 @@
 chromedriver
 *.json
 *.txt
+csdn.py
+baidu_auto.py
+baidu_seo.py

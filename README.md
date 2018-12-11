@@ -18,6 +18,8 @@ tutorial/
 │       └── baidu_search.py       #爬虫实战：反爬百度搜索找到自己
 │       └── baidu_splash.py       #爬虫实战：爬取百度动态js
 │       └── ip138.py              #爬虫实战：伪装headers构造假IP骗过ip138.com
+│       └── proxy_pool.py         #爬虫实战：教你打造自己的IP代理池
+│       └── csdn_2018_blogstar.py #爬虫实战：大数据预测CSDN2018博客之星评选结果
 │       └── qq_video.py           #爬虫实战：爬取腾讯视频评论生成词云图
 │       └── taobao_splash.py      #爬虫实战：爬取淘宝动态页面内容
 │       └── zhihu.py              #爬虫实战：Selenium登录知乎保存cookies后访问需要登录页面
@@ -28,7 +30,11 @@ tutorial/
 - [Scrapy爬虫实战：百度搜索找到自己](https://blog.csdn.net/weixin_43430036/article/details/84840614)
 - [scrapy爬虫实战：伪装headers构造假IP骗过ip138.com](https://blog.csdn.net/weixin_43430036/article/details/84849686)
 - [Scrapy Selenium实战：Selenium登录知乎保存cookies后访问需要登录页面](https://blog.csdn.net/weixin_43430036/article/details/84871624)
+- [大数据预测CSDN2018博客之星评选结果](https://blog.csdn.net/weixin_43430036/article/details/84944372)
 
 ## 精彩时刻
 ### 爬取腾讯视频评论生成词云图效果图
 ![效果图](https://github.com/Jaysong2012/tutorial/blob/master/backend/scripts/qq_video.png)
+
+### CSDN 2018博客之星 所有参选作者自荐描述擅长词云图 
+![效果图](https://github.com/Jaysong2012/tutorial/blob/master/backend/scripts/csdn_2018_blogstar_wordcloud.png)

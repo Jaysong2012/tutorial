@@ -187,3 +187,23 @@ class CSDN2018BlogStar(object):
             print('查询失败 ', str(e))
             res = None
         return res
+
+    @classmethod
+    def order_field(cls,field,order='desc'):
+        body= {
+          "size":1000,
+          "_source": ["blogstar_comment.UserName"],
+          "sort": [
+            {
+              field: {
+                "order": order
+              }
+            }
+          ]
+        }
+        try:
+            res = cls.es.search(index=cls.index, doc_type=cls.index, body=body)
+        except Exception as e:
+            print('查询失败 ', str(e))
+            res = None
+        return res

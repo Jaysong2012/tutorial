@@ -163,8 +163,8 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
    #'tutorial.pipelines.QQVideoCommentPipeline': 1,
    #'tutorial.pipelines.BaiDuSearchPipeline': 1,
-   #'tutorial.pipelines.ProxyPipeline': 1,
-   'tutorial.pipelines.CSDN2018BlogStarPipeline': 1,
+   'tutorial.pipelines.ProxyPipeline': 1,
+   #'tutorial.pipelines.CSDN2018BlogStarPipeline': 1,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

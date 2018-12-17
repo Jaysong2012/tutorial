@@ -21,7 +21,7 @@ class BaiDuSearchItem(scrapy.Item):
 
 
 class QQVideoCommentItem(scrapy.Item):
-    comment = scrapy.Field()  # 图片的链接
+    comment = scrapy.Field()  # 评论
 
 class ProxyItem(scrapy.Item):
     ip = scrapy.Field()  # IP

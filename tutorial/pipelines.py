@@ -8,9 +8,8 @@ import json
 import elasticsearch
 from backend.libs.Util import Util
 from backend.models.es.CSDN2018BlogStar import CSDN2018BlogStar
+from backend.models.es.DLDL import DLDL
 
-def get_es():
-    return elasticsearch.Elasticsearch(['192.168.199.133:9200'])
 
 class TutorialPipeline(object):
     def process_item(self, item, spider):
@@ -23,11 +22,10 @@ class BaiDuSearchPipeline(object):
 
 class QQVideoCommentPipeline(object):
     count = 0
-    index = 'dldl'
     def process_item(self, item, spider):
         print(json.dumps(item['comment']))
-        get_es().index(index=__class__.index,doc_type=__class__.index,body=item['comment'])
-        __class__.count += 1
+        item['comment']['up'] = int(item['comment']['up'])
+        DLDL.index_doc(item['comment'])
         print(__class__.count)
         return item
 

@@ -58,5 +58,5 @@ def print_useful():
 
 
 if __name__ == '__main__':
-    redis_save()
+    print_useful()
 

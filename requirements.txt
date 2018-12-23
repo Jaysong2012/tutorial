@@ -11,3 +11,4 @@ copyheaders==0.0.1
 redis
 echarts-china-provinces-pypkg
 echarts-countries-pypkg
+baidu-aip==2.2.10.0

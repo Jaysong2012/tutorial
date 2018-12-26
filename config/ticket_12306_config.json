@@ -6,8 +6,9 @@
   "to_station":"WCN",
   "to_station_text":"武昌",
   "travel_date":"'2018-12-27'",
-  "passenger_list":["宋超","张明月"],
+  "passenger_list":["张三","李四"],
   "priority_train":[
-    {"train_code":"Z27","train_seat":["硬卧","软卧"]}
+    {"train_code":"Z27","train_seat":["硬卧","软卧"]},
+    {"train_code":"K258","train_seat":["硬座"]}
   ]
 }

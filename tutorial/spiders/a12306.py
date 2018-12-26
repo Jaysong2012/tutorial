@@ -196,6 +196,8 @@ class A12306Spider(scrapy.Spider):
         #加载页面
         driver.get(cls.start_urls[0])
 
+
+
         time.sleep(3)  # 执行休眠3s等待浏览器的加载
 
         driver.find_element_by_xpath('//div[@class="login-box"]/ul[@class="login-hd"]/li[@class="login-hd-account"]/a').click()

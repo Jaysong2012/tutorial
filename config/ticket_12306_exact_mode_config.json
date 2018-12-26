@@ -5,8 +5,8 @@
   "from_station_text":"广州",
   "to_station":"WCN",
   "to_station_text":"武昌",
-  "travel_date":"'2018-12-29'",
-  "passenger_list":["宋超","张明月"],
-  "train_code":"G94",
+  "travel_date":"'2018-12-27'",
+  "passenger_list":["张三","李四"],
+  "train_code":"G552",
   "train_seat":["二等座","一等座"]
 }

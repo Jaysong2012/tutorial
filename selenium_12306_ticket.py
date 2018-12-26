@@ -217,7 +217,7 @@ if __name__ == '__main__':
 
     print_t('准备完成即将开始购票')
 
-    driver = webdriver.Chrome('/data/code/python/venv/venv_Scrapy/tutorial/chromedriver')
+    driver = webdriver.Chrome('./chromedriver')
 
     print_t('开始进入登录页面')
     driver.get('https://kyfw.12306.cn/otn/resources/login.html')

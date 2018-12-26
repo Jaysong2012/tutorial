@@ -6,7 +6,7 @@ import json
 import time
 import datetime
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException,NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.action_chains import ActionChains
@@ -123,18 +123,22 @@ def query_ticket_or_requery(driver):
     while not check_query_ticket_success(driver):
         click_query_ticket(driver)
 
-    tr = driver.find_element_by_id("ticket_"+train_no)
-    row_list =[td.text for td in tr.find_elements_by_xpath('./td')]
-    if len(row_list) > 0:
-        train_code = row_list[0].split('\n')[0]
-        if train_code == ticket_12306_config_dict['train_code']:
-            for seat in ticket_12306_config_dict['train_seat']:
-                if has_seat(row_list, seat_no[seat]):
-                    requery = False
+    try:
+        tr = driver.find_element_by_id("ticket_"+train_no)
+        row_list =[td.text for td in tr.find_elements_by_xpath('./td')]
+        if len(row_list) > 0:
+            train_code = row_list[0].split('\n')[0]
+            if train_code == ticket_12306_config_dict['train_code']:
+                for seat in ticket_12306_config_dict['train_seat']:
+                    if has_seat(row_list, seat_no[seat]):
+                        requery = False
 
-                    tr.find_element_by_xpath('./td/a').click()
-                    print_t("查票成功跳转到购买页")
-                    break
+                        tr.find_element_by_xpath('./td/a').click()
+                        print_t("查票成功跳转到购买页")
+                        break
+    except Exception as e:
+        if isinstance(e,NoSuchElementException):
+            print_t("没有找到该车次，可能该车次已经停售，系统将继续尝试，你可以Ctrl C退出选择其他车次")
 
     if requery:
         print_t('没有票，将再次发起查询')
@@ -204,12 +208,12 @@ if __name__ == '__main__':
     print('   您将为',ticket_12306_config_dict['passenger_list'],'购买在',\
             ticket_12306_config_dict['travel_date'],'由',ticket_12306_config_dict['from_station_text'],\
             '开往', ticket_12306_config_dict['to_station_text'],'的列车')
-    print('系统将选择',ticket_12306_config_dict['train_code'],'列车的',ticket_12306_config_dict['train_seat'],'席位')
+    print('   系统将选择',ticket_12306_config_dict['train_code'],'列车的',ticket_12306_config_dict['train_seat'],'席位')
 
 
     print_t('准备完成即将开始购票')
 
-    driver = webdriver.Chrome('/data/code/python/venv/venv_Scrapy/tutorial/chromedriver')
+    driver = webdriver.Chrome('./chromedriver')
 
     print_t('开始进入登录页面')
     driver.get('https://kyfw.12306.cn/otn/resources/login.html')

@@ -1,0 +1,13 @@
+{
+  "username":"username",
+  "password":"password",
+  "from_station":"SHH",
+  "from_station_text":"上海",
+  "to_station":"WCN",
+  "to_station_text":"武昌",
+  "travel_date":"'2018-12-27'",
+  "passenger_list":["宋超","张明月"],
+  "priority_train":[
+    {"train_code":"Z27","train_seat":["硬卧","软卧"]}
+  ]
+}

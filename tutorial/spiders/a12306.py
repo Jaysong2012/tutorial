@@ -141,8 +141,6 @@ class A12306Spider(scrapy.Spider):
 
         input("这里按下确认，完成购买")
 
-
-
     def query_ticket(self):
         if not Path('12306Cookies.json').exists():
             __class__.login()  # 先执行login，保存cookies之后便可以免登录操作

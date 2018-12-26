@@ -1,0 +1,12 @@
+{
+  "username":"username",
+  "password":"password",
+  "from_station":"SHH",
+  "from_station_text":"广州",
+  "to_station":"WCN",
+  "to_station_text":"武昌",
+  "travel_date":"'2018-12-29'",
+  "passenger_list":["宋超","张明月"],
+  "train_code":"G94",
+  "train_seat":["二等座","一等座"]
+}

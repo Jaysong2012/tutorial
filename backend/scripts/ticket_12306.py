@@ -12,14 +12,17 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 import asyncio
 
+username =u'username'
+password =u'password'
+
 from_station = u'SHH'
 from_station_text = u'上海'
-to_station = 'WCN'
+to_station = u'WCN'
 to_station_text = u'武昌'
 travel_date = '"2018-12-25"'
-passenger_list = ['宋超','张明月']
+passenger_list = ['张三','李四']
 priority_train = [
-    {'train_no':'Z27','train_seat':['硬卧']},
+    {'train_no':'Z27','train_seat':['硬卧','硬座']},
 ]
 
 seat_no = {
@@ -134,8 +137,7 @@ def async_tr(tr):
                         print("跳转到购买页")
                         break
 
-@asyncio.coroutine
-def async_tr_s(tr):
+async def async_tr_s(tr):
     return tr.find_elements_by_xpath('./td')
 
 @asyncio.coroutine
@@ -144,6 +146,32 @@ def async_tr_row_list(tr):
     try:
         # 将每一个tr的数据根据td查询出来，返回结果为list对象
         eles = yield from async_tr_s(tr)
+        if eles:
+            row_list = [td.text for td in eles]
+            print(row_list)
+            if len(row_list) > 0:
+                train_no = row_list[0].split('\n')[0]
+                for priority in priority_train:
+                    if train_no == priority['train_no']:
+                        for seat in priority['train_seat']:
+                            if has_seat(row_list, seat_no[seat]):
+                                requery = False
+
+                                tr.find_element_by_xpath('./td/a').click()
+                                print("跳转到购买页")
+                                has_jump_buy_page = True
+                                break
+    except Exception as e:
+        print(e)
+        if has_jump_buy_page:
+            print('已经跳转到购买页，所以查找失败，暂无影响')
+
+
+async def async_tr_row_list_await(tr):
+    global requery,has_jump_buy_page
+    try:
+        # 将每一个tr的数据根据td查询出来，返回结果为list对象
+        eles = await async_tr_s(tr)
         if eles:
             row_list = [td.text for td in eles]
             print(row_list)
@@ -189,7 +217,7 @@ def buy_ticket_or_requery(driver):
     #requery = True
     # 按行查询表格的数据，取出的数据是一整行，按空格分隔每一列的数据
     #for i,tr in enumerate(driver.find_elements_by_xpath('//tbody[@id="queryLeftTable"]/tr')):  # 遍历每一个tr
-    loop_await([async_tr_row_list(tr) for tr in driver.find_elements_by_xpath('//tbody[@id="queryLeftTable"]/tr')])
+    loop_await([async_tr_row_list_await(tr) for tr in driver.find_elements_by_xpath('//tbody[@id="queryLeftTable"]/tr')])
 
 
     print(requery,has_jump_buy_page)
@@ -223,10 +251,10 @@ if __name__ == '__main__':
         '//div[@class="login-box"]/ul[@class="login-hd"]/li[@class="login-hd-account"]/a').click()
 
     driver.find_element_by_xpath('//input[@id="J-userName"]').clear()
-    driver.find_element_by_xpath('//input[@id="J-userName"]').send_keys(u'jaysong2012')  # 填充用户名
+    driver.find_element_by_xpath('//input[@id="J-userName"]').send_keys(username)  # 填充用户名
 
     driver.find_element_by_xpath('//input[@id="J-password"]').clear()
-    driver.find_element_by_xpath('//input[@id="J-password"]').send_keys(u'java11250626')  # 填充用户名
+    driver.find_element_by_xpath('//input[@id="J-password"]').send_keys()  # 填充用户名
 
     wait_loading_or_exit(driver,'//div[@class="touclick-wrapper lgcode-2018"]/div[@id="J-loginImgArea"]/img[@id="J-loginImg"]','等待图形验证码加载完成')
 

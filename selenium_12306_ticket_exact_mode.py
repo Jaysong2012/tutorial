@@ -57,7 +57,7 @@ def get_train_list():
                 if chunk:
                     of.write(chunk)
 
-def get_train_no(train_code):
+def get_train_no(train_code,train_date):
     c = list(train_code)[0]
     with open('./config/train_list.txt', 'rb') as of:
         text = of.readline()
@@ -66,7 +66,7 @@ def get_train_no(train_code):
 
         d = json.loads(ss)
 
-        for k in d['2018-12-26'][c]:
+        for k in d[train_date][c]:
             if k['station_train_code'].find(train_code+'(')>-1:
                 return k['train_no']
 
@@ -199,7 +199,7 @@ if __name__ == '__main__':
         get_train_list()
         print_t('下载当前12306全部车次信息，50M左右，下载完成')
 
-    train_no = get_train_no(ticket_12306_config_dict['train_code'])
+    train_no = get_train_no(ticket_12306_config_dict['train_code'],ticket_12306_config_dict['travel_date'].replace('\'',''))
     if not train_no:
         print_t('你当前要购买的车次不存在，无法购买，系统将退出')
 

@@ -84,7 +84,13 @@ def wait_loading_or_exit(driver,xpath,msg='等待加载完成'):
         exit(1)
 
 def click_query_ticket(driver):
-    driver.find_element_by_xpath('//a[@id="query_ticket"]').click()
+    try:
+        driver.find_element_by_xpath('//a[@id="query_ticket"]').click()
+    except Exception as e:
+        if not check_query_ticket_success(driver):
+            time.sleep(1)
+            click_query_ticket(driver)
+
 
     print_t('点击查询按钮并且等待恢复可点击状态(等待查询完成)')
     try:
@@ -126,10 +132,13 @@ def query_ticket_or_requery(driver):
     try:
         tr = driver.find_element_by_id("ticket_"+train_no)
         row_list =[td.text for td in tr.find_elements_by_xpath('./td')]
+        print_t(row_list)
         if len(row_list) > 0:
             train_code = row_list[0].split('\n')[0]
+            print_t(train_code)
             if train_code == ticket_12306_config_dict['train_code']:
                 for seat in ticket_12306_config_dict['train_seat']:
+                    print_t(seat)
                     if has_seat(row_list, seat_no[seat]):
                         requery = False
 
@@ -145,7 +154,7 @@ def query_ticket_or_requery(driver):
         query_ticket_or_requery(driver)
 
 def has_seat(row_list,no):
-    return row_list[no] == '有' or isinstance(row_list[no],int)
+    return row_list[no] == '有' or isinstance(int(row_list[no]),int)
 
 
 def get_right_train(buy_train_code,ticket_12306_config_dict):

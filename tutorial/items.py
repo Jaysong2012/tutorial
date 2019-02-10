@@ -50,3 +50,20 @@ class CSDN2018BlogStarItem(scrapy.Item):
     archives = scrapy.Field()  # 归档
     blogstar_comment = scrapy.Field()  # 作者博客之星活动的评论
 
+class BlogStar2018Item(scrapy.Item):
+    link = scrapy.Field()  # 博客地址
+    blog_title = scrapy.Field()  # 标题
+    description = scrapy.Field()  # 描述
+    avatar_pic = scrapy.Field()  # 头像
+    original = scrapy.Field()  # 原创
+    fans = scrapy.Field()  # 粉丝
+    star = scrapy.Field()  # 喜欢
+    comment = scrapy.Field()  # 评论
+    level = scrapy.Field()  # 等级
+    visit = scrapy.Field()  # 访问
+    score = scrapy.Field()  # 积分
+    rank = scrapy.Field()  # 排名
+    medal = scrapy.Field()  # 勋章
+    colunms = scrapy.Field()  # 专栏
+    blogstar_vote = scrapy.Field()  # 作者博客之星活动的投票信息
+

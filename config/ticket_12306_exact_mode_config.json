@@ -1,12 +1,12 @@
 {
   "username":"username",
   "password":"password",
-  "from_station":"SHH",
-  "from_station_text":"广州",
-  "to_station":"WCN",
-  "to_station_text":"武昌",
-  "travel_date":"'2018-12-27'",
-  "passenger_list":["张三","李四"],
-  "train_code":"G552",
+  "from_station":"NJS",
+  "from_station_text":"南靖",
+  "to_station":"FYS",
+  "to_station_text":"福州南",
+  "travel_date":"'2019-02-02'",
+  "passenger_list":["宋超"],
+  "train_code":"D3167",
   "train_seat":["二等座","一等座"]
 }

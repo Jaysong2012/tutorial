@@ -8,6 +8,7 @@ import json
 import elasticsearch
 from backend.libs.Util import Util
 from backend.models.es.CSDN2018BlogStar import CSDN2018BlogStar
+from backend.models.es.BlogStar2018 import BlogStar2018
 from backend.models.es.DLDL import DLDL
 
 
@@ -41,4 +42,9 @@ class CSDN2018BlogStarPipeline(object):
         CSDN2018BlogStar.index_doc(json.dumps(dict(item), ensure_ascii=False))
         __class__.count += 1
         print(__class__.count)
+        return item
+
+class BlogStar2018Pipeline(object):
+    def process_item(self, item, spider):
+        BlogStar2018.index_doc(json.dumps(dict(item), ensure_ascii=False))
         return item
